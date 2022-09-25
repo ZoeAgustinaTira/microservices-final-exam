@@ -2,21 +2,17 @@ server:
   port: 8086
   
 spring:
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1;
-    username: sa
-    password: sa
-  sql:
-    init:
-      data-locations: classpath:series.sql
-  jpa:
-    defer-datasource-initialization: true
-    hibernate:
-      ddl-auto: create-drop
-      
+  data:
+    mongodb:
+      authentication-database: admin
+      username: rootuser
+      password: rootpass
+      database: tp_final
+      port: 27017
+      host: mongodb
+
 info:
   app:
-    name: Series Service
+    name: ${spring.application.name}
     version: 1.0.0
     description: Series Service
