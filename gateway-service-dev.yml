@@ -5,7 +5,7 @@ spring:
   cloud:
     gateway:
       default-filters:
-        - name: LoginFilter
+        - name: LoggingFilter
       routes:
         - id: movieRoute
           uri: lb://movie-service
@@ -19,15 +19,24 @@ spring:
         - id: catalogRoute
           uri: lb://catalog-service
           predicates:
-            - Path=/catalogs/**
+            - Path=/catalog/**
           filters:
             - name: CircuitBreaker
               args:
                 name: catalogService
-                fallbackUri: forward:/fallback/catalogs
+                fallbackUri: forward:/fallback/catalog
+        - id: seriesRoute
+          uri: lb://series-service
+          predicates:
+            - Path=/series/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: seriesService
+                fallbackUri: forward:/fallback/series
 
 info:
   app:
-    name: Gateway Service
+    name: ${spring.application.name}
     version: 1.0.0
-    description: API Gateway
+    description: Gateway
