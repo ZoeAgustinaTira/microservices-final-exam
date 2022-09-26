@@ -1,13 +1,13 @@
-cd eureka-server/
+cd eureka-service/
 mvn clean && mvn package -DskipTests
 docker build . -t eureka-server
 cd ..
 
-cd server-config/
+cd config-service/
 sh make.sh
 cd ..
 
-cd movie-service/
+cd movies-service/
 sh make.sh
 cd ..
 
@@ -16,11 +16,11 @@ mvn clean && mvn package -DskipTests
 docker build . -t catalog-service
 cd ..
 
-cd api-gateway/
+cd gateway-service/
 sh make.sh
 cd ..
 
-cd series/
+cd series-service/
 sh make.sh
 cd ..
 
