@@ -9,8 +9,8 @@ services:
     image: openzipkin/zipkin
     ports:
       - "9411:9411"
-  eureka-service:
-    image: eureka-service
+  eureka-server:
+    image: eureka-server
     ports:
       - "8761:8761"
     restart: always
@@ -19,8 +19,8 @@ services:
     ports:
       - "8888:8888"
     restart: always
-  api-gateway:
-    image: api-gateway
+  gateway-service:
+    image: gateway-service
     ports:
       - "8080:8080"
     restart: always
@@ -49,19 +49,6 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=rootpass
     ports:
       - "27017:27017"
-  mysql:
-    image: mysql
-    ports:
-      - 3306:3306
-    environment:
-      - MYSQL_DATABASE=tp_final
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=pass
-      - MYSQL_ROOT_PASSWORD=pass
-  redis:
-    image: redis
-    ports:
-     - "6379:6379"
       
 volumes:
   data: { }

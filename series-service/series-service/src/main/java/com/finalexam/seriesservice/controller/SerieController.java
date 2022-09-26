@@ -20,12 +20,21 @@ public class SerieController {
         this.serieService = serieService;
     }
 
-    @GetMapping
+    @GetMapping("/findAll")
     public ResponseEntity<?> findAll(){
         List<Serie> series = serieService.findAll();
         return series.isEmpty()
                 ? new ResponseEntity<>(HttpStatus.NOT_FOUND)
                 : ResponseEntity.ok(series);
+    }
+
+    @GetMapping("/{genre}")
+    ResponseEntity<List<Serie>> getSerieByGenre(@PathVariable String genre) {
+        return ResponseEntity.ok().body(serieService.findbyGenre(genre));
+    }
+    @GetMapping("/withErrors/{genre}")
+    ResponseEntity<List<Serie>> getSerieByGenre(@PathVariable String genre, @RequestParam("throwError") boolean throwError) {
+        return ResponseEntity.ok().body(serieService.findByGenre(genre, throwError));
     }
 
     @GetMapping("/{id}")

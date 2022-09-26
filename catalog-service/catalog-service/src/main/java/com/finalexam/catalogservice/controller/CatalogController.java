@@ -1,6 +1,7 @@
 package com.finalexam.catalogservice.controller;
 
 import com.finalexam.catalogservice.model.DTO.MovieDTO;
+import com.finalexam.catalogservice.model.DTO.SerieDTO;
 import com.finalexam.catalogservice.service.CatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,13 @@ public class CatalogController {
         this.catalogService = catalogService;
     }
 
-    @GetMapping("/{genre}")
-    public ResponseEntity<List<MovieDTO>> getGenre(@PathVariable String genre){
+    @GetMapping("/movies/{genre}")
+    public ResponseEntity<List<MovieDTO>> getMoviesByGenre(@PathVariable String genre){
         return catalogService.findMovieByGenre(genre);
+    }
+    @GetMapping("/series/{genre}")
+    public ResponseEntity<List<SerieDTO>> getSeriesByGenre(@PathVariable String genre){
+        return catalogService.findSerieByGenre(genre);
     }
 
     @GetMapping("/withErrors/{genre}")

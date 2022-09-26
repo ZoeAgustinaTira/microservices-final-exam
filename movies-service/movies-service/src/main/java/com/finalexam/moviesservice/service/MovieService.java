@@ -21,6 +21,10 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
+    public List<Movie> findAll(){
+        return movieRepository.findAll();
+    }
+
     public List<Movie> findbyGenre(String genre){
         LOG.info("Searching movies by genre: " + genre);
         return movieRepository.findByGenre(genre);
